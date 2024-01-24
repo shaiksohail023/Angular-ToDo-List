@@ -1,0 +1,66 @@
+<div class="container">
+
+    <h1>To-Do Application</h1>
+
+    <hr>
+    <form (ngSubmit)="onSubmit(taskForm)" #taskForm="ngForm">
+        <div class="form-group">
+            <label for="task">Task</label>
+            <input type="text" class="form-control" id="task" placeholder="Enter task" ngModel name="task" required>
+            <small *ngIf="taskForm.invalid && taskForm.dirty" id="errorMessage" class="form-text text-danger">Required
+                field</small>
+        </div>
+
+        <button [disabled]="taskForm.invalid" id="submitButton" type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
+    <hr>
+
+    <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary mt-3 mb-3" data-bs-toggle="modal" 
+data-bs-target="#exampleModal" style="float: right;" (click)="openModal()">
+    Add To-Do List
+  </button>
+
+    <table class="table table-striped">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">S.No</th>
+            <th scope="col">Task</th>
+            <th scope="col">Completed</th>
+            <th scope="col">Deleted</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let t of taskArray; index as i">
+            <th scope="row">{{i+1}}</th>
+            <td>{{t.taskName}}</td>
+            <td><input (change)="onCheck(i)" id="myCheckbox" type="checkbox"></td>
+            <td><button class="btn btn-danger btn-sm" (click)="onDelete(i)">Delete</button></td>
+          </tr>
+        </tbody>
+      </table>
+
+
+     
+
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          ...
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
